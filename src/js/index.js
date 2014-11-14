@@ -7,7 +7,7 @@ var getImageData = require('./lib/imagedata')
 var left = document.querySelector('#imgA')
 var right = document.querySelector('#imgB')
 
-require('async').parallel([
+require('run-parallel')([
   loaded.bind(null, left),
   loaded.bind(null, right),
 ], function() {

@@ -28,8 +28,8 @@
     "watch": "^0.13.0"
   },
   "dependencies": {
-    "async": "^0.9.0",
     "image-loaded": "0.0.2",
-    "lodash.map": "^2.4.1"
+    "lodash.map": "^2.4.1",
+    "run-parallel": "^1.0.0"
   }
 }
