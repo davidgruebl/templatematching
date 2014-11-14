@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+git add -f build
+git commit -m 'deploy'
+git push origin `git subtree split --prefix build master`:gh-pages --force
+git reset HEAD^
