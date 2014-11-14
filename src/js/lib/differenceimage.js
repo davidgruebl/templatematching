@@ -1,26 +1,26 @@
 'use strict'
 
-module.exports = function(leftImageData, rightImageData) {
-  var differenceCanvas = document.getElementById('difference')
-  var differenceCtx = differenceCanvas.getContext('2d')
-  // get the image data object
-  var differenceImage = differenceCtx.getImageData(0, 0, 300, 300)
-  // get the image data values
-  var imageData = differenceImage.data
-  var gapSize = 0
-  for (var i = 3; i < imageData.length; i += 4 + gapSize * 4) {
-    /**
-     * array access (rgba -> index 0,1,2,3 )
-     * imageData[i-3] r
-     * imageData[i-2] g
-     * imageData[i-1] b
-     * imageData[i]   a
-     */
-    imageData[i - 3] = Math.abs(leftImageData.data[i - 3] - rightImageData.data[i - 3])
-    imageData[i - 2] = Math.abs(leftImageData.data[i - 2] - rightImageData.data[i - 2])
-    imageData[i - 1] = Math.abs(leftImageData.data[i - 1] - rightImageData.data[i - 1])
-    imageData[i] = 255
-  }
-  //set new data
-  differenceCtx.putImageData(differenceImage, 0, 0)
+var map = require('lodash.map')
+
+var exports = module.exports = function(left, right) {
+  var difference = exports.difference.bind(null, left.data, right.data)
+
+  var ctx = document
+    .getElementById('difference')
+    .getContext('2d')
+
+  var image = ctx.getImageData(0, 0, 300, 300)
+
+  // data[0] -> r, data[1] -> g, data[2] -> b, data[3] -> a
+  // calculate difference except for alpha channel which is always 255
+  image.data.set(map(image.data, function(point, idx) {
+    if (!((idx+1)%4)) return 255
+    return difference(idx)
+  }))
+
+  ctx.putImageData(image, 0, 0)
+}
+
+exports.difference = function(left, right, idx) {
+  return Math.abs(left[idx] - right[idx])
 }
