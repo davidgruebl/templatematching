@@ -25,5 +25,9 @@
     "browserify": "^6.3.2",
     "node-static": "^0.7.6",
     "watch": "^0.13.0"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "image-loaded": "0.0.2"
   }
 }
