@@ -1,0 +1,29 @@
+{
+  "name": "templatematching",
+  "version": "1.0.0",
+  "description": "templatematching in js",
+  "main": "src/js/index.js",
+  "scripts": {
+    "clean": "rm -rf build && mkdir build",
+    "copy-html": "cp src/index.html build",
+    "copy-img": "cp -r src/img build",
+    "copy": "npm run copy-html && npm run copy-img",
+    "build-js": "browserify src/js/index.js > build/bundle.js",
+    "build": "npm run clean && npm run copy && npm run build-js",
+    "start": "npm run build && static build",
+    "watch": "watch 'npm run build' src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidgruebl/templatematching.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidgruebl/templatematching/issues"
+  },
+  "homepage": "https://github.com/davidgruebl/templatematching",
+  "devDependencies": {
+    "browserify": "^6.3.2",
+    "node-static": "^0.7.6",
+    "watch": "^0.13.0"
+  }
+}
