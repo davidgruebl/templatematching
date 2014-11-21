@@ -11,8 +11,22 @@ require('run-parallel')([
   loaded.bind(null, left),
   loaded.bind(null, right),
 ], function() {
+  var leftData = getImageData(left)
+  var rightData = getImageData(right)
+
   require('./lib/differenceimage')(
-    getImageData(left),
-    getImageData(right)
+    leftData,
+    rightData
   )
+
+  var correlation = require('./lib/correlation')(
+    leftData,
+    rightData
+  )
+
+  document.querySelector('#correlation').innerText = "\n"+
+    "\nKorrelation: " + correlation.value +
+    "\nKovarianz: " + correlation.covariance +
+    "\nX: " + correlation.x +
+    "\nY: " + correlation.y
 })
