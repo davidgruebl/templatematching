@@ -29,4 +29,6 @@ require('run-parallel')([
     "\nKovarianz: " + correlation.covariance +
     "\nX: " + correlation.x +
     "\nY: " + correlation.y
+
+  require('./lib/templatematching')(left, leftData)
 })
